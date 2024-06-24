@@ -13,7 +13,7 @@ struct JobListView: View {
 
     var body: some View {
         NavigationView {
-            List(viewModel.filteredJobs) { job in
+            List(viewModel.filteredJobs) { job in    // list displaying filtered job entries
                 NavigationLink(destination: JobDetailView(job: job)) {
                         VStack(alignment: .leading, spacing: 8) {
                             Text(job.jobTitle).font(.headline)
@@ -26,16 +26,21 @@ struct JobListView: View {
                 }
             }
             
-            .searchable(text: $viewModel.searchText)    // adds search functionality
+            // adds search functionality
+            .searchable(text: $viewModel.searchText)
+            
+            // alert setup, shown based on showAlert state
             .alert(isPresented: $showAlert, content: {
                 Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Unknown error"), dismissButton: .default(Text("OK")) {
-                    viewModel.errorMessage = nil
-                    showAlert = false
+                    viewModel.errorMessage = nil    // clear error message on dismiss
+                    showAlert = false   // hide alert
                 })
             })
             .onAppear {
+                // show alert if there is an error message
                 showAlert = viewModel.errorMessage != nil
-                viewModel.loadJobs()    // loads jobs when view appears
+                // loads jobs when view appears
+                viewModel.loadJobs()
             }
             .navigationTitle("Jobs")
             .listStyle(GroupedListStyle())
