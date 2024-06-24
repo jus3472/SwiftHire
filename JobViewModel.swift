@@ -33,11 +33,11 @@ class JobViewModel: ObservableObject {
                 encoding: .utf8) {
 
                 for row in resource.rows {
-                    let jobTitle = getValueOrDefault(row["Job Title"])
-                    let companyName = getValueOrDefault(row["Company Name"])
-                    let location = getValueOrDefault(row["Location"])
-                    let jobDescription = getValueOrDefault(row["Job Description"])
-                    let requirements = getValueOrDefault(row["Requirements"])
+                    let jobTitle = getValueOrDefault(row["Job Title"], defaultString: "Unknown Job Title")
+                    let companyName = getValueOrDefault(row["Company Name"], defaultString: "Unknown Company Name")
+                    let location = getValueOrDefault(row["Location"], defaultString: "Unknown Location")
+                    let jobDescription = getValueOrDefault(row["Job Description"], defaultString: "No Description Provided")
+                    let requirements = getValueOrDefault(row["Requirements"], defaultString: "No Requirements Listed")
 
                     let job = Job(jobTitle: jobTitle, companyName: companyName, location: location, jobDescription: jobDescription, requirements: requirements)
                     jobs.append(job)
@@ -52,7 +52,8 @@ class JobViewModel: ObservableObject {
         }
     }
     
-    func getValueOrDefault(_ value: String?) -> String {
-        return value?.isEmpty ?? true ? "Unknown Title" : value!
+    func getValueOrDefault(_ value: String?, defaultString: String) -> String {
+        return value?.isEmpty ?? true ? defaultString : value!
     }
+
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct JobListView: View {
     @ObservedObject var viewModel = JobViewModel()  // observes JobViewModel for changes
+    @State private var showAlert = false
 
     var body: some View {
         NavigationView {
@@ -26,15 +27,16 @@ struct JobListView: View {
             }
             
             .searchable(text: $viewModel.searchText)    // adds search functionality
+            .alert(isPresented: $showAlert, content: {
+                Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Unknown error"), dismissButton: .default(Text("OK")) {
+                    viewModel.errorMessage = nil
+                    showAlert = false
+                })
+            })
             .onAppear {
+                showAlert = viewModel.errorMessage != nil
                 viewModel.loadJobs()    // loads jobs when view appears
             }
-            .alert(isPresented: Binding<Bool>.constant(viewModel.errorMessage != nil), content: {
-                            Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Unknown error"), dismissButton: .default(Text("OK")) {
-                                // reset the error message after the alert is dismissed
-                                viewModel.errorMessage = nil
-                            })
-                        })
             .navigationTitle("Jobs")
             .listStyle(GroupedListStyle())
         }
