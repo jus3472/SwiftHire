@@ -11,6 +11,7 @@ import SwiftCSV
 class JobViewModel: ObservableObject {
     @Published var jobs = [Job]()   // list of jobs
     @Published var searchText = ""  // search text for filtering jobs
+    @Published var errorMessage: String?    // error message
 
     var filteredJobs: [Job] {
         if searchText.isEmpty {
@@ -32,19 +33,21 @@ class JobViewModel: ObservableObject {
                 encoding: .utf8) {
 
                 for row in resource.rows {
-                    if let jobTitle = row["Job Title"],
-                       let companyName = row["Company Name"],
-                       let location = row["Location"],
-                       let jobDescription = row["Job Description"],
-                       let requirements = row["Requirements"] {
-                        let job = Job(jobTitle: jobTitle, companyName: companyName, location: location, jobDescription: jobDescription, requirements: requirements)
-                        jobs.append(job)    // create and append new Job instance
-                    }
+                    let jobTitle = row["Job Title"] ?? "Unknown Title"
+                    let companyName = row["Company Name"] ?? "Unknown Company"
+                    let location = row["Location"] ?? "Unknown Location"
+                    let jobDescription = row["Job Description"] ?? "No Description Provided"
+                    let requirements = row["Requirements"] ?? "No Requirements Listed"
+
+                    let job = Job(jobTitle: jobTitle, companyName: companyName, location: location, jobDescription: jobDescription, requirements: requirements)
+                    jobs.append(job)
                 }
             } else {
+                self.errorMessage = "Failed to load or parse the CSV file."
                 print("Failed to load or parse the CSV file.")
             }
         } catch {
+            self.errorMessage = "Error reading CSV: \(error.localizedDescription)"
             print("Error reading CSV: \(error)")    // log errors
         }
     }

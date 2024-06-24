@@ -29,6 +29,12 @@ struct JobListView: View {
             .onAppear {
                 viewModel.loadJobs()    // loads jobs when view appears
             }
+            .alert(isPresented: Binding<Bool>.constant(viewModel.errorMessage != nil), content: {
+                            Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Unknown error"), dismissButton: .default(Text("OK")) {
+                                // reset the error message after the alert is dismissed
+                                viewModel.errorMessage = nil
+                            })
+                        })
             .navigationTitle("Jobs")
             .listStyle(GroupedListStyle())
         }
