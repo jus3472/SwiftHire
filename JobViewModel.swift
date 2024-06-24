@@ -33,11 +33,11 @@ class JobViewModel: ObservableObject {
                 encoding: .utf8) {
 
                 for row in resource.rows {
-                    let jobTitle = row["Job Title"] ?? "Unknown Title"
-                    let companyName = row["Company Name"] ?? "Unknown Company"
-                    let location = row["Location"] ?? "Unknown Location"
-                    let jobDescription = row["Job Description"] ?? "No Description Provided"
-                    let requirements = row["Requirements"] ?? "No Requirements Listed"
+                    let jobTitle = getValueOrDefault(row["Job Title"])
+                    let companyName = getValueOrDefault(row["Company Name"])
+                    let location = getValueOrDefault(row["Location"])
+                    let jobDescription = getValueOrDefault(row["Job Description"])
+                    let requirements = getValueOrDefault(row["Requirements"])
 
                     let job = Job(jobTitle: jobTitle, companyName: companyName, location: location, jobDescription: jobDescription, requirements: requirements)
                     jobs.append(job)
@@ -50,5 +50,9 @@ class JobViewModel: ObservableObject {
             self.errorMessage = "Error reading CSV: \(error.localizedDescription)"
             print("Error reading CSV: \(error)")    // log errors
         }
+    }
+    
+    func getValueOrDefault(_ value: String?) -> String {
+        return value?.isEmpty ?? true ? "Unknown Title" : value!
     }
 }
