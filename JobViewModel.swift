@@ -60,8 +60,20 @@ class JobViewModel: ObservableObject {
     
     // helper function to return value or a default string if the value is nil or empty
     func getValueOrDefault(_ value: String?, defaultString: String) -> String {
-        // checks if value is nil or empty, returns defaultString if true, otherwise returns the value
-        return value?.isEmpty ?? true ? defaultString : value!
+        // first, check if the value is nil
+           if let actualValue = value {
+               // if value is not nil, check if it is empty
+               if actualValue.isEmpty {
+                   // if the value is empty, return the default string
+                   return defaultString
+               } else {
+                   // if the value is not empty and not nil, return the actual value
+                   return actualValue
+               }
+           } else {
+               // if the value is nil, return the default string
+               return defaultString
+           }
     }
 
 }

@@ -16,13 +16,19 @@ struct JobListView: View {
             List(viewModel.filteredJobs) { job in    // list displaying filtered job entries
                 NavigationLink(destination: JobDetailView(job: job)) {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text(job.jobTitle).font(.headline)
-                                .foregroundColor(.primary)
-                            Text(job.companyName).font(.subheadline)
-                                .foregroundColor(.secondary)
-                            Text(job.location).font(.caption)
-                                .foregroundColor(.gray)
+                            
+                            Text(job.jobTitle).font(.custom("Vedo", size: 18))
+                                .fontWeight(.heavy)
+                                .foregroundColor(Color(red: 61/255, green: 61/255, blue: 61/255, opacity: 1)).padding(.top, 9)
+                            
+                            Text(job.companyName).font(.custom("AvenirNext-Medium", size: 16))
+                                .foregroundColor(Color(red: 244/255, green: 96/255, blue: 54/255, opacity: 1))
+                            
+                            Text(job.location).font(.custom("AvenirNext-Regular", size: 12))
+                                .foregroundColor(.gray).frame(width: 100, height: 10)
+
                         }
+                    
                 }
             }
             
@@ -42,9 +48,10 @@ struct JobListView: View {
                 // loads jobs when view appears
                 viewModel.loadJobs()
             }
-            .navigationTitle("Jobs")
+            .navigationTitle("Jobs").font(.custom("Futura-Medium", size: 15))
             .listStyle(GroupedListStyle())
         }
+        
     }
 }
 

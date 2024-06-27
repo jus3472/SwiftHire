@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B890BDC2C2C0A93003252C7 /* HelveticaNeue.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 6B890BDB2C2C0A93003252C7 /* HelveticaNeue.ttc */; };
+		6B890BDF2C2CAAC4003252C7 /* Avenir Next.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 6B890BDE2C2CAAC4003252C7 /* Avenir Next.ttc */; };
+		6B890BE12C2CAAE0003252C7 /* Futura.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 6B890BE02C2CAAE0003252C7 /* Futura.ttc */; };
+		6B890BE32C2CAC59003252C7 /* Vedo.woff.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B890BE22C2CAC59003252C7 /* Vedo.woff.ttf */; };
 		6BE96EA02C2925A300DE15B3 /* SwiftHireApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE96E9F2C2925A200DE15B3 /* SwiftHireApp.swift */; };
 		6BE96EA42C2925A400DE15B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BE96EA32C2925A400DE15B3 /* Assets.xcassets */; };
 		6BE96EA72C2925A400DE15B3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BE96EA62C2925A400DE15B3 /* Preview Assets.xcassets */; };
@@ -19,6 +23,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B890BDB2C2C0A93003252C7 /* HelveticaNeue.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeue.ttc; sourceTree = "<group>"; };
+		6B890BDD2C2C0BA4003252C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6B890BDE2C2CAAC4003252C7 /* Avenir Next.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Avenir Next.ttc"; sourceTree = "<group>"; };
+		6B890BE02C2CAAE0003252C7 /* Futura.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Futura.ttc; sourceTree = "<group>"; };
+		6B890BE22C2CAC59003252C7 /* Vedo.woff.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vedo.woff.ttf; sourceTree = "<group>"; };
 		6BE96E9C2C2925A200DE15B3 /* SwiftHire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftHire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BE96E9F2C2925A200DE15B3 /* SwiftHireApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftHireApp.swift; sourceTree = "<group>"; };
 		6BE96EA32C2925A400DE15B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,10 +51,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B890BD92C2C08FB003252C7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6B890BE22C2CAC59003252C7 /* Vedo.woff.ttf */,
+				6B890BE02C2CAAE0003252C7 /* Futura.ttc */,
+				6B890BDE2C2CAAC4003252C7 /* Avenir Next.ttc */,
+				6B890BDB2C2C0A93003252C7 /* HelveticaNeue.ttc */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		6BE96E932C2925A200DE15B3 = {
 			isa = PBXGroup;
 			children = (
-				6BE96EB82C29274900DE15B3 /* jobs.csv */,
 				6BE96E9E2C2925A200DE15B3 /* SwiftHire */,
 				6BE96E9D2C2925A200DE15B3 /* Products */,
 			);
@@ -62,6 +81,9 @@
 		6BE96E9E2C2925A200DE15B3 /* SwiftHire */ = {
 			isa = PBXGroup;
 			children = (
+				6B890BDD2C2C0BA4003252C7 /* Info.plist */,
+				6BE96EB82C29274900DE15B3 /* jobs.csv */,
+				6B890BD92C2C08FB003252C7 /* Fonts */,
 				6BE96E9F2C2925A200DE15B3 /* SwiftHireApp.swift */,
 				6BE96EB02C29264400DE15B3 /* Job.swift */,
 				6BE96EB22C29268A00DE15B3 /* JobViewModel.swift */,
@@ -145,7 +167,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B890BE12C2CAAE0003252C7 /* Futura.ttc in Resources */,
+				6B890BDF2C2CAAC4003252C7 /* Avenir Next.ttc in Resources */,
+				6B890BDC2C2C0A93003252C7 /* HelveticaNeue.ttc in Resources */,
 				6BE96EA72C2925A400DE15B3 /* Preview Assets.xcassets in Resources */,
+				6B890BE32C2CAC59003252C7 /* Vedo.woff.ttf in Resources */,
 				6BE96EA42C2925A400DE15B3 /* Assets.xcassets in Resources */,
 				6BE96EB92C29274900DE15B3 /* jobs.csv in Resources */,
 			);
@@ -299,6 +325,7 @@
 				DEVELOPMENT_TEAM = M886TN6JH7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftHire/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -328,6 +355,7 @@
 				DEVELOPMENT_TEAM = M886TN6JH7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftHire/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
