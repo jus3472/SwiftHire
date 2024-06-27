@@ -34,6 +34,16 @@ struct JobDetailView: View {
                     Text("Requirements:").font(.custom("HelveticaNeue-Medium", size: 17))
                     Text(job.requirements).font(.custom("HelveticaNeue-Italic", size: 15))
                 }
+                Divider()
+                
+                Spacer(minLength: 423)
+                Section(footer: Text("© 2024 Justin Jiang. All rights reserved.")
+                    .font(.custom("Futura", size:15))
+                    .foregroundColor(Color(red: 61/255, green: 61/255, blue: 61/255))
+                    .frame(maxWidth: .infinity, alignment: .center)
+                ) {
+                    EmptyView()
+                }
             }
             .padding()
         }
