@@ -11,7 +11,7 @@ import SwiftUI
 struct SwiftHireApp: App {
     var body: some Scene {
         WindowGroup {
-            JobListView()   // the root view for the app, showing the job list
+            LaunchScreenView()
         }
     }
 }
