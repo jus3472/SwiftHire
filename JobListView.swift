@@ -14,6 +14,33 @@ struct JobListView: View {
     var body: some View {
         NavigationView {
             List {
+                Text("SwiftHire")
+                    .font(.custom("Futura", size:40))
+                    .foregroundColor(Color(red: 244/255, green: 96/255, blue: 54/255))
+                    .frame(maxWidth: .infinity, maxHeight: 80, alignment: .center)
+                    .listRowSeparator(.hidden)
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                    TextField("Search", text: $viewModel.searchText)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    if !viewModel.searchText.isEmpty {
+                        Button(action: {
+                            withAnimation {
+                                viewModel.searchText = ""
+                            }
+                        }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.gray)
+                        }
+                        .transition(.scale)
+                    }
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(20)
+                .padding(.horizontal, 15)
+                
                 ForEach(viewModel.filteredJobs) { job in
                     ZStack {
                         // invisible NavigationLink
@@ -28,7 +55,8 @@ struct JobListView: View {
                                     .font(.custom("Vedo", size: 18))
                                     .fontWeight(.heavy)
                                     .foregroundColor(Color(red: 61/255, green: 61/255, blue: 61/255))
-                                    .padding(.top, 9)
+                                    .padding(.top, 4)
+                                    .transition(.slide)
                                 Text(job.companyName)
                                     .font(.custom("AvenirNext-Medium", size: 16))
                                     .foregroundColor(Color(red: 244/255, green: 96/255, blue: 54/255))
@@ -44,31 +72,41 @@ struct JobListView: View {
                         }
                         .padding(5)
                     }
+                    .animation(.easeInOut(duration: 0.3), value: viewModel.filteredJobs)
                 }
                 
                 Section(footer: Text("© 2024 Justin Jiang. All rights reserved.")
                     .font(.custom("Futura", size:15))
                     .foregroundColor(Color(red: 61/255, green: 61/255, blue: 61/255))
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 30)
+                    .listRowSeparator(.hidden)
                 ) {
                     EmptyView()
                 }
                 
             }
         
-            .searchable(text: $viewModel.searchText)
             .alert(isPresented: $showAlert, content: {
                 Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Unknown error"), dismissButton: .default(Text("OK")) {
                     viewModel.errorMessage = nil    // Clear error message on dismiss
-                    showAlert = false   // Hide alert
+                    withAnimation {
+                        showAlert = false   // Hide alert
+                    }
                 })
             })
             .onAppear {
-                showAlert = viewModel.errorMessage != nil
-                viewModel.loadJobs()
+                withAnimation {
+                    showAlert = viewModel.errorMessage != nil
+                    viewModel.loadJobs()
+                }
             }
-            .navigationTitle("Jobs")
-            .listStyle(GroupedListStyle())
+            .onChange(of: viewModel.errorMessage, initial: true) { oldError, newError in
+                withAnimation {
+                    showAlert = newError != nil
+                }
+            }
+            .listStyle(PlainListStyle())
         }
     }
 }
